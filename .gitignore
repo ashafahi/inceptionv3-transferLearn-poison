@@ -197,9 +197,16 @@ venv.bak/
 ./Data/rawImages/*
 ./Data/rawImages/*/*
 ./Data/final_images/*
+Data/XY/*
+Data/rawImages/*
+Data/rawImages/*/*
+Data/final_images/*
 
 #removing graph defs
 ./inceptionModel/inception-2015-12-05/*
+inceptionModel/inception-2015-12-05/*
 ./dog_v_fish_cold_graph/*
+dog_v_fish_cold_graph/*
 ./dog_v_fish_hot_graph/*
+dog_v_fish_hot_graph/*
 # End of https://www.gitignore.io/api/macos,python,pycharm
