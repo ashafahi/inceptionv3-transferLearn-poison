@@ -19,16 +19,16 @@ To reproduce the results, the following steps should be taken:
 Update directories for the saved raw images as needed. It is initially set to main_dog and fish.
 
 If this is the first time running the script, set firsTime = True in the main_oneShot.py script. This will do the following:
-a) load the images into numpy arrays
-b) removes images that might cause an issue with inception - these are the ones which have less than 3 dimensions
-c) saves the numpy ndarrays for future use
-d) run the images through inception and get the feature representations for the images - this step may be time consuming since incpetion does not allow insertion of a batch of images to the 'DecodeJpeg:0' tensor. But don't worry, we will save them for re-using -- its a one time thing.
-e) Load the bottleneck tensors and do the train test split and save it
+1. load the images into numpy arrays
+2. removes images that might cause an issue with inception - these are the ones which have less than 3 dimensions
+3. saves the numpy ndarrays for future use
+4. run the images through inception and get the feature representations for the images - this step may be time consuming since incpetion does not allow insertion of a batch of images to the 'DecodeJpeg:0' tensor. But don't worry, we will save them for re-using -- its a one time thing.
+5. Load the bottleneck tensors and do the train test split and save it
 
 If it is not the first time running the script and all of the data is loaded, the remainder of script does the following:
-i) load the train and test data 
-ii) treat every test image as a target instance and depending on the parameters, select a base instance from the opposite class.
-iii) make the poison instance and save the numpy array and the "compressed JPEG" version of it for visualizing it. 
+1. load the train and test data 
+2. treat every test image as a target instance and depending on the parameters, select a base instance from the opposite class.
+3. make the poison instance and save the numpy array and the "compressed JPEG" version of it for visualizing it. 
 
 ``Poison making'' is done via a Forward-Backward-Splitting Algorithm. For details see the utility file and/or view our paper.
 
