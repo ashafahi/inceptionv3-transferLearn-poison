@@ -13,7 +13,7 @@ To reproduce the results, the following steps should be taken:
 
 ## One-time setup steps
 1. Download and extract the pre-trained [Inception v3](http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz) model and save it in ./inceptionModel (the pb file should be in './inceptionModel/inception-2015-12-05/classify_image_graph_def.pb')
-2. Download the images from [imageNet](http://www.image-net.org/) and save the raw images in /Data/rawImages/nameOfCategory
+2. Download the images from [imageNet](http://www.image-net.org/) and save the raw images in /Data/rawImages/nameOfCategory [nameOfCategory for dog is: "main_dog"; for fish it is: "fish"]
 
 ## Running the main file for making poisons: main_oneShot.py
 Update directories for the saved raw images as needed. It is initially set to main_dog and fish.
