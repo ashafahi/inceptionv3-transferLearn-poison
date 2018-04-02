@@ -88,7 +88,7 @@ for i in range(len(X_test)):
 		if Y_test[i] == 1 and counter<len(class_dog_base_id_in_test):				#if target is fish, the poison base should be a dog
 			baseImg = X_inp_test[class_dog_base_id_in_test[counter]]
 		elif Y_test[i] == 0 and counter<len(class_fish_base_id_in_test):
-			baseImg = X_inp_test[class_fish_base_id_in_testp[counter]]
+			baseImg = X_inp_test[class_fish_base_id_in_test[counter]]
 		else:
 			startFromClosest = True
 		if startFromClosest:
