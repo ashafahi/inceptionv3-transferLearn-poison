@@ -33,7 +33,7 @@ if firsTime:
 	#save the images to file for future use
 	directory = './Data/final_images/'
 	if not os.path.exists(directory):
-    	os.makedirs(directory)
+		os.makedirs(directory)
 	np.save(directory+'dogInput.npy',allDogs)
 	directory = './Data/final_images/'
 	if not os.path.exists(directory):
@@ -45,7 +45,7 @@ if firsTime:
 	dogFeats = get_feat_reps(X=allDogs, class_t='dog')
 	directory = './Data/final_images/'
 	if not os.path.exists(directory):
-    	os.makedirs(directory)
+ 		os.makedirs(directory)
 	np.save(directory+'dogFeats.npy',dogFeats)
 	fishFeats = get_feat_reps(X=allFishes, class_t='fish')
 	directory = './Data/final_images/'
