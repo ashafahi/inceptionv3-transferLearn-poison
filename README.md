@@ -40,6 +40,7 @@ Then depending on the attack being warm start or cold start, we should run the a
 
 
 If you find this study useful for your own research, please consider citing the Poison Frogs paper:
+```
 @ARTICLE{2018arXiv180400792S,
    author = {{Shafahi}, A. and {Ronny Huang}, W. and {Najibi}, M. and {Suciu}, O. and 
 	{Studer}, C. and {Dumitras}, T. and {Goldstein}, T.},
@@ -54,5 +55,4 @@ archivePrefix = "arXiv",
    adsurl = {http://adsabs.harvard.edu/abs/2018arXiv180400792S},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
-
-
+```
