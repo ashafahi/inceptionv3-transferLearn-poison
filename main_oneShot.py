@@ -82,9 +82,10 @@ if not os.path.exists(directoryForPoisons):
 
 for i in range(len(X_test)):
 	diff = 100
+	maxTriesForOptimizing = 10
 	counter = 0
 	targetImg = X_inp_test[i]
-	while diff > threshold:
+	while (diff > threshold) and (counter < maxTriesForOptimizing):
 		if Y_test[i] == 1 and counter<len(class_dog_base_id_in_test):				#if target is fish, the poison base should be a dog
 			baseImg = X_inp_test[class_dog_base_id_in_test[counter]]
 		elif Y_test[i] == 0 and counter<len(class_fish_base_id_in_test):
@@ -94,7 +95,7 @@ for i in range(len(X_test)):
 		if startFromClosest:
 			ind = closest_to_target_from_class( classBase = 1 - Y_test[i] , targetFeatRep= X_test[i] ,allTestFeatReps=X_test, allTestClass=Y_test)
 			baseImg = X_inp_test[ind]
-		img, diff = do_optimization(targetImg, baseImg, MaxIter=1000,coeffSimInp=0.2, saveInterim=False, imageID=i)
+		img, diff = do_optimization(targetImg, baseImg, MaxIter=2000,coeffSimInp=0.2, saveInterim=False, imageID=i, objThreshold=2.9)
 		print('built poison for target %d with diff: %.5f'%(i,diff))
 		counter += 1
 	# save the image to file and keep statistics

@@ -256,7 +256,7 @@ def do_backward(baseInpImage,currentImage,coeff_sim_inp,learning_rate,eps=0.1,do
         back_res = np.clip(back_res,0,255)
     return back_res
 
-def do_optimization(targetImg, baseImg, MaxIter=200,coeffSimInp=0.25, saveInterim=False, imageID=0):
+def do_optimization(targetImg, baseImg, MaxIter=200,coeffSimInp=0.25, saveInterim=False, imageID=0, objThreshold = 2.9):
     """
     Returns the poison image and the difference between the poison and target in feature space.
     Parameters
@@ -272,6 +272,9 @@ def do_optimization(targetImg, baseImg, MaxIter=200,coeffSimInp=0.25, saveInteri
         similarity to the feature representation of the target when everything is normalized
         the objective function of the optimization is:
                 || f(x)-f(t) ||^2 + coeffSimInp * || x-b ||^2
+    objThreshold: float
+        the threshold for the objective functoin, when the obj func falls below this, the 
+        optimization is stopped even if the MaxIter is not met.
     Returns
     -------
     old_image, finalDiff : ndarray, float
@@ -281,7 +284,6 @@ def do_optimization(targetImg, baseImg, MaxIter=200,coeffSimInp=0.25, saveInteri
 
     #parameters:
     Adam = False
-    objThreshold = 2.9              #the threshold for the objective function: whenever we go below this, we stop - measure of dist in feat space
     decayCoef = 0.5                 #decay coeffiencet of learning rate
     learning_rate = 500.0*255      #iniital learning rate for optimiz
     stopping_tol = 1e-10            #for the relative change
