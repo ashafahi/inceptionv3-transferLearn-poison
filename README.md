@@ -1,6 +1,6 @@
 # OneShotKillPoisonAttack
 
-This is a one shot kill attack on transfer learning experiment for the binary classification (dog-vs-fish) that uses inception v3.
+This is a one shot kill attack on transfer learning experiment for the binary classification (dog-vs-fish) that uses inception v3 based on what is described in the [Poison Frogs! paper](https://arxiv.org/abs/1804.00792).
 
 We should define three terms for this attack:
 a) base instance: the image that the poison looks like in image/input space
@@ -39,6 +39,20 @@ In this part, we check the effectiveness for every attack. Since we are going to
 Then depending on the attack being warm start or cold start, we should run the appropriate file.
 
 
-If you find this study useful for your own research, please consider citing the following paper:
+If you find this study useful for your own research, please consider citing the Poison Frogs paper:
+@ARTICLE{2018arXiv180400792S,
+   author = {{Shafahi}, A. and {Ronny Huang}, W. and {Najibi}, M. and {Suciu}, O. and 
+	{Studer}, C. and {Dumitras}, T. and {Goldstein}, T.},
+    title = "{Poison Frogs! Targeted Clean-Label Poisoning Attacks on Neural Networks}",
+  journal = {ArXiv e-prints},
+archivePrefix = "arXiv",
+   eprint = {1804.00792},
+ primaryClass = "cs.LG",
+ keywords = {Computer Science - Learning, Computer Science - Cryptography and Security, Computer Science - Computer Vision and Pattern Recognition, Statistics - Machine Learning},
+     year = 2018,
+    month = apr,
+   adsurl = {http://adsabs.harvard.edu/abs/2018arXiv180400792S},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 
 
