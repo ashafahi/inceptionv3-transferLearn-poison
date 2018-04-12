@@ -27,7 +27,7 @@ if not os.path.isdir('warmParams'):
 
 Poises = np.load('all_poisons.npy')
 other_class_prob = []
-numMiscclassified = 0
+numNotMiscclassified = 0
 poison_corr_class_prob = []
 numPoisonCorr = 0
 print(Poises.shape)
@@ -35,14 +35,14 @@ for targID, thePoison in enumerate(Poises):
 	print("******************%d********************"%targID)
 	target_class_probs, target_corr_pred, poison_class_probs, poison_corr_pred, allWeights, allbiases = train_last_layer_of_inception(targetFeatRep=X_test[targID],poisonInpImage=thePoison,poisonClass=1-Y_test[targID],X_tr=X_tr,Y_tr=Y_tr,Y_validation=Y_test,X_validation=X_test, cold=coldStart)
 	other_class_prob.append(target_class_probs[0][int(1-Y_test[targID])])
-	numMiscclassified += 1*target_corr_pred[0]
+	numNotMiscclassified += 1*target_corr_pred[0]
 	poison_corr_class_prob.append(poison_class_probs[0][int(1-Y_test[targID])])
 	numPoisonCorr += 1*poison_corr_pred[0]
 	np.save('./warmParams/%d_weights.npy'%targID,allWeights)
 	np.save('./warmParams/%d_bias.npy'%targID,allbiases)
 print('##############################')
 print('out of %d poisons, %d got correctly classified!'%(len(Poises),numPoisonCorr))
-print('out of %d targets, %d got misclassified!'%(len(Y_test),numMiscclassified))
+print('out of %d targets, %d got misclassified!'%(len(Y_test), len(Y_test) - numNotMiscclassified))
 other_class_prob = np.array(other_class_prob)
 np.save('Wrong_ClassProb_targ.npy',other_class_prob)
 poison_corr_class_prob = np.array(poison_corr_class_prob)
