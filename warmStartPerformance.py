@@ -6,6 +6,7 @@ At the end, we check to see whether the target got misclassified or not
 
 developed by ashafahi @ March 15 3:00 pm
 """
+import os
 import numpy as np
 import tensorflow as tf
 from util_one_shot_kill_attack import train_last_layer_of_inception
@@ -21,6 +22,8 @@ X_test = np.load(directorySaving+all_datas[1]+'.npy')
 Y_tr = np.load(directorySaving+all_datas[4]+'.npy')
 Y_test = np.load(directorySaving+all_datas[5]+'.npy')
 print('done loading data!')
+if not os.path.isdir('warmParams'):
+    os.mkdir('warmParams')
 
 Poises = np.load('all_poisons.npy')
 other_class_prob = []

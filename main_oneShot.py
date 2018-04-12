@@ -18,8 +18,8 @@ threshold = 3.5 #threshold for L2 distance in feature space
 
 if startFromClosest == False:
 	#these are some preferred images as base instances which will be used for generating poison instances for the attacks
-	class_dog_base_id_in_test = [507, 406, 493]#647
-	class_fish_base_id_in_test = [738,718,991,962] #859
+	class_dog_base_id_in_test = [507, 406, 493]
+	class_fish_base_id_in_test = [738,718,991,962]
 
 if firsTime:
 	#load the images into numpy arrays
@@ -85,17 +85,26 @@ for i in range(len(X_test)):
 	maxTriesForOptimizing = 10
 	counter = 0
 	targetImg = X_inp_test[i]
+	usedClosest = False
 	while (diff > threshold) and (counter < maxTriesForOptimizing):
 		if Y_test[i] == 1 and counter<len(class_dog_base_id_in_test):				#if target is fish, the poison base should be a dog
 			baseImg = X_inp_test[class_dog_base_id_in_test[counter]]
 		elif Y_test[i] == 0 and counter<len(class_fish_base_id_in_test):
 			baseImg = X_inp_test[class_fish_base_id_in_test[counter]]
 		else:
-			startFromClosest = True
-		if startFromClosest:
-			ind = closest_to_target_from_class( classBase = 1 - Y_test[i] , targetFeatRep= X_test[i] ,allTestFeatReps=X_test, allTestClass=Y_test)
-			baseImg = X_inp_test[ind]
-		img, diff = do_optimization(targetImg, baseImg, MaxIter=2000,coeffSimInp=0.2, saveInterim=False, imageID=i, objThreshold=2.9)
+			if not usedClosest:
+				ind = closest_to_target_from_class( classBase = 1 - Y_test[i] , targetFeatRep= X_test[i] ,allTestFeatReps=X_test, allTestClass=Y_test)
+				baseImg = X_inp_test[ind]
+				usedClosest = True
+			else:
+				print('Using random base!')
+				classBase = 1 - Y_test[i]
+				possible_indices = np.argwhere(Y_test == classBase)[:,0]
+				ind = np.random.randint(len(possible_indices))
+				ind = possible_indices[ind]
+				baseImg = X_inp_test[ind]
+
+		img, diff = do_optimization(targetImg, baseImg, MaxIter=1500,coeffSimInp=0.2, saveInterim=False, imageID=i, objThreshold=2.9)
 		print('built poison for target %d with diff: %.5f'%(i,diff))
 		counter += 1
 	# save the image to file and keep statistics

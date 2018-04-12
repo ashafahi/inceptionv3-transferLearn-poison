@@ -139,7 +139,7 @@ sess.run(init)
 #save the graph for cold start
 if not os.path.exists('./dog_v_fish_cold_graph/'):
     os.makedirs('./dog_v_fish_cold_graph/')
-saver.save('./dog_v_fish_cold_graph')
+saver.save(sess, './dog_v_fish_cold_graph/dog_v_fish_cold_graph')
 
 
 X_tr = np.squeeze(X_tr)
@@ -153,4 +153,4 @@ print("test acc:",sess.run(evaluation_step, feed_dict={X_Bottleneck: X_test, Y_t
 # #Now, save the warm start graph
 if not os.path.exists('./dog_v_fish_hot_graph/'):
     os.makedirs('./dog_v_fish_hot_graph/')
-saver.save(sess, './dog_v_fish_hot_graph')
+saver.save(sess, './dog_v_fish_hot_graph/dog_v_fish_hot_graph')

@@ -8,7 +8,7 @@ developed by ashafahi @ March 13 3:00 pm
 """
 import numpy as np
 import tensorflow as tf
-from util_one_shot_kill_attack import train_last_layer_of_inception_cold
+from util_one_shot_kill_attack import train_last_layer_of_inception
 from os import listdir
 import imageio
 
@@ -41,7 +41,7 @@ numPoisonCorr = 0
 print(Poises.shape)
 for targID, thePoison in enumerate(Poises):
 	print("******************%d********************"%targID)
-	target_class_probs, target_corr_pred, poison_class_probs, poison_corr_pred = train_last_layer_of_inception_cold(targetFeatRep=X_test[targID],poisonInpImage=thePoison,poisonClass=1-Y_test[targID],X_tr=X_tr,Y_tr=Y_tr,Y_validation=Y_test,X_validation=X_test)
+	target_class_probs, target_corr_pred, poison_class_probs, poison_corr_pred = train_last_layer_of_inception(targetFeatRep=X_test[targID],poisonInpImage=thePoison,poisonClass=1-Y_test[targID],X_tr=X_tr,Y_tr=Y_tr,Y_validation=Y_test,X_validation=X_test, cold=True)
 	other_class_prob.append(target_class_probs[0][int(1-Y_test[targID])])
 	numMiscclassified += 1*target_corr_pred[0]
 	poison_corr_class_prob.append(poison_class_probs[0][int(1-Y_test[targID])])

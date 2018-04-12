@@ -529,7 +529,7 @@ def train_last_layer_of_inception(targetFeatRep,poisonInpImage,poisonClass,X_tr,
         print("hot start")
     else:
         print("cold start")
-        train_step = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy) #, var_list=[biasvar, weightsvar] # GradientDescent
+        train_step = tf.train.AdamOptimizer(learning_rate, name='ADMM').minimize(cross_entropy) #, var_list=[biasvar, weightsvar] # GradientDescent
         sess.run(tf.global_variables_initializer())             #also intialize the variables if doing cold start. they are random or somewhat random numbers
     correct_prediction = tf.equal(tf.argmax(Ylogits, 1), tf.argmax(Y_true, 1))
     class_probs = tf.nn.softmax(Ylogits)
